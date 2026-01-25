@@ -41,7 +41,11 @@ fn get_system_specs() -> SystemSpecs {
     sys.refresh_cpu_all();
     sys.refresh_memory();
 
-    let cpu_brand = sys.cpus().first().map(|cpu| cpu.brand().to_string()).unwrap_or_else(|| "Unknown CPU".to_string());
+    let cpu_brand = sys
+        .cpus()
+        .first()
+        .map(|cpu| cpu.brand().to_string())
+        .unwrap_or_else(|| "Unknown CPU".to_string());
     let ram_gb = sys.total_memory() / 1024 / 1024 / 1024; // Bytes -> GB
     let os_name = System::name().unwrap_or_else(|| "Unknown OS".to_string());
     let os_version = System::os_version().unwrap_or_else(|| "".to_string());
@@ -57,7 +61,10 @@ fn get_system_specs() -> SystemSpecs {
 fn get_gpu_specs() -> GpuSpecs {
     // Strategy 1: nvidia-smi
     let nvidia_output = Command::new("nvidia-smi")
-        .args(["--query-gpu=name,memory.total", "--format=csv,noheader,nounits"])
+        .args([
+            "--query-gpu=name,memory.total",
+            "--format=csv,noheader,nounits",
+        ])
         .output();
 
     if let Ok(output) = nvidia_output {
