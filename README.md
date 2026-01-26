@@ -2,7 +2,7 @@
 
 **LLM Suggest** is a cross-platform desktop application built with [Tauri v2](https://v2.tauri.app/), [Rust](https://www.rust-lang.org/), and [Preact](https://preactjs.com/). It automatically detects your system hardware (CPU, RAM, GPU/VRAM) and recommends the optimal local Large Language Model (LLM) to run using [Ollama](https://ollama.com/).
 
-![Valid UI Screenshot Required Here]
+![LLM-Suggest Logo](./docs/images/appScreenShot.png)
 
 ## Features
 
