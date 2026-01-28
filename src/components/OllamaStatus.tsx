@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'preact/hooks';
+import { openUrl } from '@tauri-apps/plugin-opener';
 
 export function OllamaStatus() {
   const [status, setStatus] = useState<'checking' | 'running' | 'stopped'>('checking');
@@ -30,10 +31,22 @@ export function OllamaStatus() {
     return () => clearInterval(interval);
   }, []);
 
+  if (status === 'stopped') {
+    return (
+      <button 
+        class="ollama-status stopped"
+        onClick={() => openUrl('https://ollama.com')}
+      >
+        <span class="status-indicator"></span>
+        Install Ollama
+      </button>
+    );
+  }
+
   return (
     <div class={`ollama-status ${status}`}>
       <span class="status-indicator"></span>
-      Ollama is {status === 'running' ? 'Running' : status === 'checking' ? 'Checking...' : 'Not Detected'}
+      Ollama is {status === 'running' ? 'Running' : 'Checking...'}
     </div>
   );
 }
